@@ -149,10 +149,11 @@
         import * as THREE from 'three';
 
         // --- 3D Background Component ---
-        const OrganicShape = () => {
+        const OrganicShape = ({ isPaused }) => {
             const meshRef = useRef();
 
             useFrame((state) => {
+                if (isPaused) return;
                 const t = state.clock.getElapsedTime();
                 if (meshRef.current) {
                     meshRef.current.rotation.x = Math.sin(t / 4) / 2;
@@ -167,7 +168,7 @@
                         <torusKnotGeometry args={[0.9, 0.3, 64, 16]} />
                         <MeshTransmissionMaterial
                             backside
-                            samples={4}
+                            samples={2}
                             thickness={0.8}
                             roughness={0.2}
                             clearcoat={0.8}
@@ -188,50 +189,31 @@
         }
 
         const Scene = () => {
+            const [isPaused, setIsPaused] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setIsPaused(window.scrollY > window.innerHeight * 0.5);
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
             return (
-                <Canvas camera={{ position: [0, 0, 6], fov: 45 }} className="!fixed top-0 left-0 w-full h-full -z-10 pointer-events-none">
+                <Canvas
+                    camera={{ position: [0, 0, 6], fov: 45 }}
+                    dpr={[1, 1.5]}
+                    gl={{ antialias: false }}
+                    className="!fixed top-0 left-0 w-full h-full -z-10 pointer-events-none"
+                >
                     <ambientLight intensity={0.45} />
                     <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} color="#ffe7f2" intensity={1.4} />
                     <Environment preset="sunset">
-                        <Lightformer intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[20, 0.1, 1]} color="#ffb4d5" />
-                        <Lightformer rotation-y={Math.PI / 2} position={[-5, -1, -1]} scale={[20, 0.5, 1]} color="#ff6fa7" />
+                        <Lightformer intensity={1.5} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[20, 0.1, 1]} color="#ffb4d5" />
                         <Lightformer rotation-y={-Math.PI / 2} position={[10, 1, 0]} scale={[20, 1, 1]} color="#fff" />
                     </Environment>
-                    <OrganicShape />
-                    <Petals />
+                    <OrganicShape isPaused={isPaused} />
                 </Canvas>
-            );
-        };
-
-        const Petals = () => {
-            const ref = useRef();
-            const [sphere] = useState(() => {
-                const positions = new Float32Array(100 * 3);
-                for (let i = 0; i < 100 * 3; i++) positions[i] = (Math.random() - 0.5) * 12;
-                return positions;
-            });
-
-            useFrame((state, delta) => {
-                ref.current.rotation.x -= delta / 30;
-                ref.current.rotation.y -= delta / 35;
-            });
-
-            return (
-                <group rotation={[0, 0, Math.PI / 4]}>
-                    <points ref={ref}>
-                        <bufferGeometry>
-                            <bufferAttribute attach="attributes-position" count={sphere.length / 3} array={sphere} itemSize={3} />
-                        </bufferGeometry>
-                        <pointsMaterial
-                            size={0.05}
-                            color="#ffd1e6"
-                            transparent
-                            opacity={0.95}
-                            sizeAttenuation={true}
-                            depthWrite={false}
-                        />
-                    </points>
-                </group>
             );
         };
 
