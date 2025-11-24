@@ -1,58 +1,23 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jinu &amp; Sumi | The Wedding</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Nanum+Pen+Script&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#fff7fb',
-                            100: '#ffe7f2',
-                            200: '#ffcfe4',
-                            300: '#ffb4d5',
-                            400: '#ff89bd',
-                            500: '#ff6fa7',
-                            600: '#f24493',
-                            700: '#d52b7c',
-                            800: '#b21f66',
-                            900: '#7a1947',
-                            950: '#3c0821',
-                        },
-                        glass: "rgba(255, 214, 230, 0.08)",
-                        glassBorder: "rgba(255, 214, 230, 0.15)",
-                    },
-                    animation: {
-                        'spin-slow': 'spin 12s linear infinite',
-                        'marquee': 'marquee 25s linear infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        marquee: {
-                            '0%': { transform: 'translateX(0%)' },
-                            '100%': { transform: 'translateX(-100%)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+
 
     <!-- Import Map -->
     <script type="importmap">
@@ -74,38 +39,66 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-        body { 
-            margin: 0; 
-            overflow-x: hidden; 
-            background-color: #140610; 
-            background-image: 
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            background-color: #140610;
+            background-image:
                 radial-gradient(circle at 20% 20%, rgba(255, 143, 189, 0.25), transparent 30%),
                 radial-gradient(circle at 80% 15%, rgba(255, 111, 167, 0.22), transparent 28%),
                 radial-gradient(circle at 50% 80%, rgba(255, 200, 222, 0.14), transparent 32%);
-            color: #fff7fb; 
+            color: #fff7fb;
         }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         /* Beam Animation */
         @keyframes beam {
-            0% { offset-distance: 0%; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { offset-distance: 100%; opacity: 0; }
+            0% {
+                offset-distance: 0%;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                offset-distance: 100%;
+                opacity: 0;
+            }
         }
+
         .border-beam {
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             pointer-events: none;
             border-radius: inherit;
             z-index: 10;
             clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
         }
+
         .border-beam::after {
             content: '';
             position: absolute;
-            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
             border-radius: inherit;
             background: linear-gradient(90deg, transparent, #ff6fa7, transparent);
             background-size: 200% 200%;
@@ -116,22 +109,37 @@
         }
 
         @keyframes rotate-beam {
-            0% { clip-path: inset(0 0 98% 0); }
-            25% { clip-path: inset(0 98% 0 0); }
-            50% { clip-path: inset(98% 0 0 0); }
-            75% { clip-path: inset(0 0 0 98%); }
-            100% { clip-path: inset(0 0 98% 0); }
+            0% {
+                clip-path: inset(0 0 98% 0);
+            }
+
+            25% {
+                clip-path: inset(0 98% 0 0);
+            }
+
+            50% {
+                clip-path: inset(98% 0 0 0);
+            }
+
+            75% {
+                clip-path: inset(0 0 0 98%);
+            }
+
+            100% {
+                clip-path: inset(0 0 98% 0);
+            }
         }
-        
+
         .mask-linear-fade {
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
     </style>
 </head>
+
 <body>
     <div id="root"></div>
 
-    <script type="text/babel" data-type="module">
+    <script type="text/babel" data-type="module" data-presets="react">
         import React, { useState, useEffect, useRef } from 'react';
         import { createRoot } from 'react-dom/client';
         import { Canvas, useFrame } from '@react-three/fiber';
@@ -143,10 +151,10 @@
         // --- 3D Background Component ---
         const OrganicShape = () => {
             const meshRef = useRef();
-            
+
             useFrame((state) => {
                 const t = state.clock.getElapsedTime();
-                if(meshRef.current) {
+                if (meshRef.current) {
                     meshRef.current.rotation.x = Math.sin(t / 4) / 2;
                     meshRef.current.rotation.y = Math.sin(t / 2) / 2;
                     meshRef.current.position.y = Math.sin(t / 3) / 5;
@@ -157,7 +165,7 @@
                 <Float speed={3} rotationIntensity={1} floatIntensity={2}>
                     <mesh ref={meshRef} scale={2.6}>
                         <torusKnotGeometry args={[0.9, 0.3, 128, 32]} />
-                        <MeshTransmissionMaterial 
+                        <MeshTransmissionMaterial
                             backside
                             samples={8}
                             thickness={0.8}
@@ -199,7 +207,7 @@
             const ref = useRef();
             const [sphere] = useState(() => {
                 const positions = new Float32Array(220 * 3);
-                for(let i=0; i<220*3; i++) positions[i] = (Math.random() - 0.5) * 12;
+                for (let i = 0; i < 220 * 3; i++) positions[i] = (Math.random() - 0.5) * 12;
                 return positions;
             });
 
@@ -224,6 +232,159 @@
                         />
                     </points>
                 </group>
+            );
+        };
+
+        // --- Configuration & Data ---
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        handwriting: ['Nanum Pen Script', 'cursive'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fff7fb',
+                            100: '#ffe7f2',
+                            200: '#ffcfe4',
+                            300: '#ffb4d5',
+                            400: '#ff89bd',
+                            500: '#ff6fa7',
+                            600: '#f24493',
+                            700: '#d52b7c',
+                            800: '#b21f66',
+                            900: '#7a1947',
+                            950: '#3c0821',
+                        },
+                        glass: "rgba(255, 214, 230, 0.08)",
+                        glassBorder: "rgba(255, 214, 230, 0.15)",
+                    },
+                    animation: {
+                        'spin-slow': 'spin 12s linear infinite',
+                        'marquee': 'marquee 25s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+
+        const galleryImages = [
+            { src: "images/couple_inside_1.jpg", label: "Indoor 1", text: "함께하는 모든 순간이\n영화처럼 기억되길", rotation: -1 },
+            { src: "images/couple_inside_2.webp", label: "Indoor 2", text: "따뜻한 햇살처럼\n서로를 비추며", rotation: 2 },
+            { src: "images/couple_inside_3.webp", label: "Indoor 3", text: "매일매일 더\n사랑할게", rotation: -3 },
+            { src: "images/coupleshot_outside_1.webp", label: "Outdoor 1", text: "우리 둘만의\n이야기", rotation: 1 },
+            { src: "images/coupleshot_outside_2.webp", label: "Outdoor 2", text: "영원히\n함께하자", rotation: -2 },
+            { src: "images/coupleshot_outside_3.jpg", label: "Outdoor 3", text: "너와 함께라면\n어디든 좋아", rotation: 2 },
+            { src: "images/coupleshot_outside_4.jpg", label: "Outdoor 4", text: "가장 소중한\n나의 사람", rotation: -1 },
+            { src: "images/coupleshot_outside_5.avif", label: "Outdoor 5", text: "행복한\n우리의 시작", rotation: 3 },
+            { src: "images/coupleshot_outside_6.jpg", label: "Outdoor 6", text: "사랑해\n그리고 고마워", rotation: -2 },
+            { src: "images/514730397-e55a73cf-7ee2-4eb8-8141-c3f333dc4d1b.jpg", label: "Detail", text: "작은 순간들도\n소중하게", rotation: 1 },
+        ];
+
+        const featuredImages = [
+            { src: "images/sumi_outside_2.jpg", label: "Sumi", note: "images/jinu_handwright.webp", rotation: -2, scale: 2.2 },
+            { src: "images/jinu_outside_2.webp", label: "Jinu", note: "images/sumi_handwright.webp", rotation: 3, scale: 3 },
+        ];
+
+        const Polaroid = ({ img, index, isFeatured = false }) => {
+            return (
+                <motion.div
+                    initial={{ opacity: 0, y: 50, rotate: 0 }}
+                    whileInView={{ opacity: 1, y: 0, rotate: img.rotation }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    whileHover={{ scale: 1.05, rotate: 0, zIndex: 10, transition: { duration: 0.3 } }}
+                    className={`relative bg-white p-3 pb-12 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] transform transition-all duration-300 group ${isFeatured ? 'max-w-sm mx-auto' : ''}`}
+                    style={{ transformOrigin: "center center" }}
+                >
+                    <div className="relative aspect-[3/4] overflow-hidden bg-gray-100">
+                        <div
+                            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                            style={{ backgroundImage: `url('${img.src}')` }}
+                        />
+                        <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300" />
+                    </div>
+
+                    {/* Handwritten Note Overlay */}
+                    {img.note ? (
+                        <div
+                            className="absolute -top-12 -left-4 z-20 pointer-events-none"
+                            style={{ width: img.scale ? `${12 * img.scale}rem` : '12rem' }}
+                        >
+                            <img
+                                src={img.note}
+                                alt="Handwritten note"
+                                className="w-full h-auto opacity-90 drop-shadow-[0_2px_4px_rgba(255,255,255,0.4)]"
+                            />
+                        </div>
+                    ) : (
+                        <div className="absolute bottom-4 left-0 right-0 text-center px-2">
+                            <p className="font-handwriting text-2xl text-gray-800 leading-tight opacity-80 rotate-[-1deg]">
+                                {img.text}
+                            </p>
+                        </div>
+                    )}
+
+                    {/* Tape Effect */}
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-white/30 backdrop-blur-sm rotate-[-2deg] shadow-sm border border-white/40" />
+                </motion.div>
+            );
+        };
+
+        const FeaturedCouple = () => {
+            return (
+                <section className="py-20 px-6 md:px-12 max-w-5xl mx-auto w-full">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-16"
+                    >
+                        <h3 className="text-brand-100 text-xs font-bold uppercase tracking-[0.3em] mb-3">The Couple</h3>
+                        <h2 className="text-3xl font-serif italic text-white">Beginning of Forever</h2>
+                    </motion.div>
+
+                    <div className="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-20">
+                        {featuredImages.map((img, idx) => (
+                            <div key={idx} className="w-full md:w-1/2 max-w-sm">
+                                <Polaroid img={img} index={idx} isFeatured={true} />
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            );
+        };
+
+        const PhotoGallery = () => {
+            return (
+                <section className="py-32 px-4 md:px-8 max-w-7xl mx-auto w-full overflow-hidden">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-20 relative"
+                    >
+                        <h3 className="text-brand-100 text-xs font-bold uppercase tracking-[0.3em] mb-4">Our Memories</h3>
+                        <h2 className="text-4xl md:text-5xl font-serif italic text-white mb-6">Gallery</h2>
+                        <div className="w-24 h-1 bg-gradient-to-r from-transparent via-brand-400 to-transparent mx-auto opacity-50" />
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 px-4 md:px-12">
+                        {galleryImages.map((img, idx) => (
+                            <div key={idx} className={`${idx % 2 !== 0 ? 'md:mt-12' : ''}`}>
+                                <Polaroid img={img} index={idx} />
+                            </div>
+                        ))}
+                    </div>
+                </section>
             );
         };
 
@@ -263,9 +424,10 @@
             );
         };
 
+
         const TextReveal = ({ text, className = "", delay = 0 }) => {
             const chars = text.split("");
-            
+
             const container = {
                 hidden: { opacity: 0 },
                 visible: (i = 1) => ({
@@ -322,10 +484,10 @@
                             key={i}
                             initial={{ height: "100%" }}
                             animate={{ height: "0%" }}
-                            transition={{ 
-                                duration: 0.8, 
-                                delay: 0.5 + (i * 0.1), 
-                                ease: [0.76, 0, 0.24, 1] 
+                            transition={{
+                                duration: 0.8,
+                                delay: 0.5 + (i * 0.1),
+                                ease: [0.76, 0, 0.24, 1]
                             }}
                             className="w-1/5 bg-brand-950/80 border-r border-brand-900/30 last:border-none relative"
                         />
@@ -339,8 +501,8 @@
                 <div className="relative flex overflow-hidden select-none w-full py-4 group">
                     <div className="absolute left-0 top-0 z-10 h-full w-12 md:w-32 bg-gradient-to-r from-[#140610] to-transparent"></div>
                     <div className="absolute right-0 top-0 z-10 h-full w-12 md:w-32 bg-gradient-to-l from-[#140610] to-transparent"></div>
-                    
-                    <motion.div 
+
+                    <motion.div
                         className="flex shrink-0 gap-12 py-2 min-w-full"
                         animate={{ x: reverse ? ["0%", "-50%"] : ["-50%", "0%"] }}
                         transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
@@ -362,9 +524,9 @@
                 { id: 2, title: "The Venue", content: "Bailey House", sub: "Samsung Branch, Seoul", icon: MapPin },
                 { id: 3, title: "The Couple", content: "Jinu & Sumi", sub: "Beginning of Forever", icon: Heart },
             ];
-            
+
             const [index, setIndex] = useState(0);
-            const [dir, setDir] = useState(1); 
+            const [dir, setDir] = useState(1);
 
             const nextCard = () => {
                 setDir(1);
@@ -458,24 +620,64 @@
             ];
 
             return (
-                <div className="flex gap-6 text-center px-6 py-4 rounded-full border border-brand-100/30 bg-white/5 backdrop-blur-md shadow-lg">
+                <div className="flex flex-wrap justify-center gap-3 md:gap-6 text-center px-4 md:px-6 py-4 rounded-3xl md:rounded-full border border-brand-100/30 bg-white/5 backdrop-blur-md shadow-lg max-w-[90vw]">
                     {items.map((item, idx) => (
-                        <div key={idx} className="flex flex-col items-center min-w-[64px]">
-                            <span className="text-2xl md:text-3xl font-light text-white font-serif italic">{item.val}</span>
-                            <span className="text-[10px] uppercase tracking-widest text-brand-50/70 mt-1">{item.label}</span>
+                        <div key={idx} className="flex flex-col items-center min-w-[50px] md:min-w-[64px]">
+                            <span className="text-xl md:text-3xl font-light text-white font-serif italic">{item.val}</span>
+                            <span className="text-[8px] md:text-[10px] uppercase tracking-widest text-brand-50/70 mt-1">{item.label}</span>
                         </div>
                     ))}
                 </div>
             );
         }
 
+        const Curtain = () => {
+            return (
+                <motion.div
+                    className="fixed inset-0 z-[100] flex pointer-events-none"
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: 0, transition: { delay: 2.5, duration: 1 } }}
+                >
+                    <motion.div
+                        className="w-1/2 h-full bg-[#1a0510] relative"
+                        initial={{ x: "0%" }}
+                        animate={{ x: "-100%" }}
+                        transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                    >
+                        <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-brand-500/50 to-transparent opacity-50" />
+                    </motion.div>
+                    <motion.div
+                        className="w-1/2 h-full bg-[#1a0510] relative"
+                        initial={{ x: "0%" }}
+                        animate={{ x: "100%" }}
+                        transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                    >
+                        <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-brand-500/50 to-transparent opacity-50" />
+                    </motion.div>
+
+                    {/* Artistic Logo/Text in center before opening */}
+                    <motion.div
+                        className="absolute inset-0 flex items-center justify-center z-10"
+                        initial={{ opacity: 1, scale: 1 }}
+                        animate={{ opacity: 0, scale: 1.1 }}
+                        transition={{ duration: 1.5, delay: 0.5 }}
+                    >
+                        <div className="text-center">
+                            <div className="text-brand-200/80 text-xs tracking-[0.5em] uppercase mb-4">The Wedding</div>
+                            <div className="text-5xl md:text-7xl font-serif italic text-white/90">Jinu & Sumi</div>
+                        </div>
+                    </motion.div>
+                </motion.div>
+            );
+        };
+
         const Main = () => {
             return (
                 <main className="relative z-10 min-h-screen flex flex-col selection:bg-brand-500/30 selection:text-white">
-                    <PageLoader />
-                    
+                    <Curtain />
+
                     {/* Header */}
-                    <nav className="fixed top-0 w-full z-40 flex justify-between items-center px-6 py-6 md:px-12 text-brand-50">
+                    <nav className="fixed top-0 w-full z-40 flex justify-between items-center px-6 py-6 md:px-12 text-brand-50 mix-blend-difference">
                         <div className="text-xs font-bold tracking-widest uppercase text-brand-50/90">Jinu & Sumi</div>
                         <div className="px-3 py-1 rounded-full bg-white/5 border border-brand-100/40 backdrop-blur-md text-[10px] font-medium tracking-widest text-brand-50">
                             2026.01.24
@@ -485,13 +687,20 @@
                     {/* Hero Section */}
                     <section className="min-h-screen flex flex-col items-center justify-center px-6 text-center pt-20 relative overflow-hidden">
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] bg-brand-500/20 blur-[160px] rounded-full pointer-events-none" />
+                        <div className="absolute inset-0 pointer-events-none">
+                            <div
+                                className="absolute inset-0 opacity-25 bg-cover bg-center"
+                                style={{ backgroundImage: "url('images/coupleshot_outside_2.webp')" }}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-b from-[#140610]/30 via-[#140610]/70 to-[#140610]" />
+                        </div>
 
                         <div className="relative z-10 w-full max-w-3xl">
-                            <div className="rounded-3xl bg-white/18 border border-white/30 backdrop-blur-2xl shadow-[0_25px_80px_-40px_rgba(0,0,0,0.8)] px-6 py-10 md:px-10 md:py-12">
-                                <motion.div 
-                                    initial={{ opacity: 0, y: -20 }} 
-                                    animate={{ opacity: 1, y: 0 }} 
-                                    transition={{ duration: 1.2 }}
+                            <div className="rounded-3xl bg-white/22 border border-white/30 backdrop-blur-2xl shadow-[0_25px_80px_-40px_rgba(0,0,0,0.8)] px-6 py-10 md:px-10 md:py-12">
+                                <motion.div
+                                    initial={{ opacity: 0, y: -20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 1.2, delay: 2.8 }}
                                     className="mb-6 flex flex-col items-center gap-2"
                                 >
                                     <Sparkles className="text-brand-100/70 animate-pulse-slow" size={20} strokeWidth={1} />
@@ -499,28 +708,28 @@
                                         We Are Getting Married
                                     </span>
                                 </motion.div>
-                                
+
                                 <div className="flex flex-col items-center gap-1 mb-8">
-                                    <TextReveal text="JINU" className="text-7xl md:text-8xl lg:text-9xl font-serif italic tracking-tighter text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.35)]" delay={0.5} />
-                                    
-                                    <motion.div 
-                                        initial={{ scaleX: 0, opacity: 0 }} 
-                                        animate={{ scaleX: 1, opacity: 1 }} 
-                                        transition={{ delay: 1.2, duration: 1.2, ease: "circOut" }}
+                                    <TextReveal text="JINU" className="text-7xl md:text-8xl lg:text-9xl font-serif italic tracking-tighter text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.35)]" delay={3.0} />
+
+                                    <motion.div
+                                        initial={{ scaleX: 0, opacity: 0 }}
+                                        animate={{ scaleX: 1, opacity: 1 }}
+                                        transition={{ delay: 3.5, duration: 1.2, ease: "circOut" }}
                                         className="flex items-center gap-4 w-full justify-center my-2"
                                     >
                                         <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-brand-200/60" />
                                         <span className="text-brand-200 font-light italic text-2xl">&</span>
                                         <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-brand-200/60" />
                                     </motion.div>
-                                    
-                                    <TextReveal text="SUMI" className="text-7xl md:text-8xl lg:text-9xl font-serif italic tracking-tighter text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.35)]" delay={0.9} />
+
+                                    <TextReveal text="SUMI" className="text-7xl md:text-8xl lg:text-9xl font-serif italic tracking-tighter text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.35)]" delay={3.2} />
                                 </div>
 
                                 <motion.div
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 1.5, duration: 0.8 }}
+                                    transition={{ delay: 3.8, duration: 0.8 }}
                                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/25 text-[11px] uppercase tracking-[0.32em] text-brand-50/90 shadow-lg mb-6"
                                 >
                                     jinu &amp; sumi
@@ -529,7 +738,7 @@
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    transition={{ delay: 1.8, duration: 1 }}
+                                    transition={{ delay: 4.0, duration: 1 }}
                                     className="flex flex-col gap-8 items-center max-w-2xl mx-auto text-center"
                                 >
                                     <p className="text-lg text-brand-50/90 leading-relaxed">
@@ -551,11 +760,11 @@
                                 </motion.div>
                             </div>
                         </div>
-                        
-                        <motion.div 
-                            initial={{ opacity: 0 }} 
-                            animate={{ opacity: 1 }} 
-                            transition={{ delay: 2.5, duration: 1 }}
+
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 4.5, duration: 1 }}
                             className="absolute bottom-10 text-brand-50/50 animate-bounce"
                         >
                             <div className="w-[1px] h-12 bg-gradient-to-b from-transparent to-brand-300/70 mx-auto mb-2" />
@@ -570,25 +779,25 @@
 
                     {/* Message Section */}
                     <section className="py-32 px-6 md:px-12 max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-20 items-center">
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, x: -30, filter: 'blur(5px)' }}
                             whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
                             viewport={{ once: true, margin: "-20%" }}
                             transition={{ duration: 0.8 }}
                         >
-                            <div className="rounded-3xl bg-white/14 border border-white/25 backdrop-blur-2xl shadow-[0_25px_80px_-40px_rgba(0,0,0,0.7)] p-8 md:p-10">
+                            <div className="rounded-3xl bg-white/20 border border-white/25 backdrop-blur-2xl shadow-[0_25px_80px_-40px_rgba(0,0,0,0.7)] p-8 md:p-10">
                                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-200/40 bg-brand-200/10 text-brand-50 text-[10px] uppercase tracking-widest mb-6">
                                     <Sparkles size={10} /> Invitation
                                 </div>
                                 <h2 className="text-3xl md:text-4xl font-serif italic leading-snug mb-8 text-brand-50">
-                                    진우와 수미의 결혼식에<br/>
+                                    진우와 수미의 결혼식에<br />
                                     <span className="text-brand-100 not-italic font-light tracking-tight text-2xl md:text-3xl mt-2 block">소중한 분들을 초대합니다.</span>
                                 </h2>
-                                
+
                                 <div className="space-y-6 text-brand-50/80 text-sm leading-loose font-light">
                                     <p>
-                                        저희 결혼합니다.<br/>
-                                        서로 보듬어주며 다정하게 살아가겠습니다.<br/>
+                                        저희 결혼합니다.<br />
+                                        서로 보듬어주며 다정하게 살아가겠습니다.<br />
                                         그 시작의 날, 귀한 걸음하시어 축복해주세요.
                                     </p>
                                     <div className="flex flex-col gap-3 mt-10 pt-10 border-t border-brand-100/20">
@@ -618,7 +827,7 @@
 
                     {/* Grid Cards Section */}
                     <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto w-full">
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -628,67 +837,113 @@
                             <h2 className="text-3xl font-serif italic text-white">Information</h2>
                         </motion.div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <SpotlightCard className="p-8 h-72 flex flex-col justify-between bg-white/5 hover:bg-white/10 transition-colors">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <SpotlightCard className="p-8 h-auto flex flex-col justify-between bg-white/5 hover:bg-white/10 transition-colors">
                                 <div className="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center border border-brand-200/60">
                                     <MapPin className="text-brand-50" size={18} strokeWidth={1.5} />
                                 </div>
                                 <div>
                                     <h3 className="text-lg font-medium text-brand-50 mb-2 flex items-center gap-2">Location <ArrowRight size={14} className="text-brand-200/80" /></h3>
                                     <p className="text-brand-50/80 text-sm leading-relaxed">
-                                        더베일리하우스 삼성점<br/>
-                                        서울 강남구 영동대로 506<br/>
+                                        더베일리하우스 삼성점<br />
+                                        서울 강남구 영동대로 506<br />
                                         <span className="text-brand-100/80 text-xs mt-1 block">삼성역 7번 출구 바로 앞</span>
                                     </p>
+                                    <div className="mt-4 rounded-2xl overflow-hidden border border-white/15 shadow-inner bg-[#1a0913] h-80">
+                                        <img
+                                            src="images/map.avif"
+                                            alt="Wedding Location Map"
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
                                 </div>
                             </SpotlightCard>
-                             
-                            <SpotlightCard className="p-8 h-72 flex flex-col justify-between bg-white/5 hover:bg-white/10 transition-colors">
-                                <div className="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center border border-brand-200/60">
+
+                            <SpotlightCard className="p-8 h-auto flex flex-col bg-white/5 hover:bg-white/10 transition-colors relative">
+                                <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+                                    <Sparkles size={120} strokeWidth={0.5} />
+                                </div>
+
+                                <div className="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center border border-brand-200/60 mb-6">
                                     <Clock className="text-brand-50" size={18} strokeWidth={1.5} />
                                 </div>
-                                <div>
-                                    <h3 className="text-lg font-medium text-brand-50 mb-2">Ceremony</h3>
-                                    <p className="text-brand-50/80 text-sm leading-relaxed">
-                                        2026년 1월 24일 (토)<br/>
-                                        오후 12시 30분<br/>
-                                        4층 그레이스 홀
-                                    </p>
-                                </div>
-                            </SpotlightCard>
 
-                            <SpotlightCard className="p-8 h-72 flex flex-col justify-between bg-white/5 hover:bg-white/10 transition-colors">
-                                <div className="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center border border-brand-200/60">
-                                    <Utensils className="text-brand-50" size={18} strokeWidth={1.5} />
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-medium text-brand-50 mb-2">Dining</h3>
-                                    <p className="text-brand-50/80 text-sm leading-relaxed">
-                                        예식 후 2층 연회장에서<br/>
-                                        정성스럽게 준비한 식사가<br/>
-                                        준비되어 있습니다.
-                                    </p>
+                                <div className="flex flex-col h-full justify-between gap-6 pb-2">
+                                    <div>
+                                        <h3 className="text-lg font-medium text-brand-50 mb-4">Ceremony</h3>
+                                        <div className="space-y-2">
+                                            <p className="text-2xl font-serif italic text-white">2026년 1월 24일 (토)</p>
+                                            <p className="text-xl text-brand-100/90">오후 12시 30분</p>
+                                            <p className="text-brand-50/70 text-sm mt-2">4층 그레이스 홀</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row gap-8 items-center justify-center mt-auto bg-black/20 rounded-2xl p-6 border border-white/5 backdrop-blur-sm w-full">
+                                        {/* Calendar Widget */}
+                                        <div className="flex flex-col items-center">
+                                            <div className="text-[10px] uppercase tracking-widest text-brand-200/80 mb-2">January 2026</div>
+                                            <div className="grid grid-cols-7 gap-1.5 text-center text-[10px] text-brand-50/60">
+                                                {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(d => <div key={d} className="w-5 h-5 flex items-center justify-center">{d}</div>)}
+                                                {/* Empty days for start of Jan 2026 (Jan 1 is Thursday) */}
+                                                {[...Array(4)].map((_, i) => <div key={`e-${i}`} />)}
+                                                {[...Array(31)].map((_, i) => {
+                                                    const day = i + 1;
+                                                    const isTarget = day === 24;
+                                                    return (
+                                                        <div
+                                                            key={day}
+                                                            className={`w-5 h-5 flex items-center justify-center rounded-full ${isTarget ? 'bg-brand-500 text-white shadow-[0_0_10px_rgba(255,111,167,0.5)]' : ''}`}
+                                                        >
+                                                            {day}
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        </div>
+
+                                        <div className="w-px h-24 bg-white/10 hidden sm:block" />
+
+                                        {/* Clock Widget */}
+                                        <div className="flex flex-col items-center">
+                                            <div className="relative w-24 h-24 rounded-full border-2 border-brand-200/30 bg-brand-950/40 shadow-inner flex items-center justify-center">
+                                                {/* Clock Face Markers */}
+                                                {[...Array(12)].map((_, i) => (
+                                                    <div
+                                                        key={i}
+                                                        className="absolute w-0.5 h-1.5 bg-brand-100/40"
+                                                        style={{ transform: `rotate(${i * 30}deg) translateY(-10px)`, transformOrigin: '50% 48px' }}
+                                                    />
+                                                ))}
+                                                {/* 12, 3, 6, 9 markers */}
+                                                <div className="absolute top-1 w-0.5 h-2 bg-brand-100/80" />
+                                                <div className="absolute bottom-1 w-0.5 h-2 bg-brand-100/80" />
+                                                <div className="absolute left-1 w-2 h-0.5 bg-brand-100/80" />
+                                                <div className="absolute right-1 w-2 h-0.5 bg-brand-100/80" />
+
+                                                {/* Hour Hand (12:30 -> 15deg past 12) */}
+                                                <div
+                                                    className="absolute w-1 h-6 bg-brand-100 rounded-full origin-bottom"
+                                                    style={{ transform: 'rotate(15deg) translateY(-50%)', bottom: '50%' }}
+                                                />
+                                                {/* Minute Hand (30 mins = 180deg) */}
+                                                <div
+                                                    className="absolute w-0.5 h-8 bg-brand-300 rounded-full origin-bottom"
+                                                    style={{ transform: 'rotate(180deg) translateY(-50%)', bottom: '50%' }}
+                                                />
+                                                {/* Center Dot */}
+                                                <div className="absolute w-1.5 h-1.5 bg-brand-50 rounded-full shadow-[0_0_5px_rgba(255,255,255,0.8)]" />
+                                            </div>
+                                            <div className="text-[10px] uppercase tracking-widest text-brand-200/80 mt-3">12:30 PM</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </SpotlightCard>
                         </div>
                     </section>
 
-                    {/* Image/Photo Visual Break */}
-                    <section className="w-full h-64 md:h-96 relative overflow-hidden border-y border-brand-900/30">
-                        <div className="absolute inset-0 bg-gradient-to-r from-brand-950/50 via-brand-900/40 to-brand-800/40"></div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="text-center z-10">
-                                <p className="text-brand-50/80 text-xs font-bold uppercase tracking-[0.4em] mb-4">Gallery</p>
-                                <p className="text-2xl md:text-4xl font-serif italic text-white/90">Our Beautiful Moments</p>
-                                <div className="mt-6 flex justify-center gap-2">
-                                    <div className="w-2 h-2 rounded-full bg-brand-400"></div>
-                                    <div className="w-2 h-2 rounded-full bg-brand-900/50"></div>
-                                    <div className="w-2 h-2 rounded-full bg-brand-900/50"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-luminosity hover:opacity-40 transition-opacity duration-1000 grayscale"></div>
-                    </section>
+                    <FeaturedCouple />
+
+                    <PhotoGallery />
 
                     {/* Footer Marquee Reversed */}
                     <section className="py-16 bg-[#140610]">
@@ -721,4 +976,5 @@
     </script>
 
 </body>
+
 </html>
